@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Veri Tezgahı Podcast</title>
+    <link>http://veritezgahi.com/</link>
+    <description>Recent content on Veri Tezgahı Podcast</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Nov 2020 01:00:13 +0300</lastBuildDate><atom:link href="http://veritezgahi.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>#3 Olcay Yılmazçoban: E-spor&#39;da Yapay Zeka Uygulamaları</title>
+      <link>http://veritezgahi.com/olcay_yilmazcoban/</link>
+      <pubDate>Sat, 28 Nov 2020 01:00:13 +0300</pubDate>
+      
+      <guid>http://veritezgahi.com/olcay_yilmazcoban/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>#2 Feyza Akyürek ve Ekin Akyürek: Doğal Dil İşleme</title>
+      <link>http://veritezgahi.com/feyza_ekin_akyurek/</link>
+      <pubDate>Sat, 28 Nov 2020 00:56:54 +0300</pubDate>
+      
+      <guid>http://veritezgahi.com/feyza_ekin_akyurek/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>#1 Cağlayan Dicle: Sürücüsüz Araçlar</title>
+      <link>http://veritezgahi.com/caglayan_dicle/</link>
+      <pubDate>Sat, 28 Nov 2020 00:51:00 +0300</pubDate>
+      
+      <guid>http://veritezgahi.com/caglayan_dicle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://veritezgahi.com/host/tarikkelestemur/</link>
+      <pubDate>Sat, 28 Nov 2020 00:46:20 +0300</pubDate>
+      
+      <guid>http://veritezgahi.com/host/tarikkelestemur/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>#0 Veri Tezgahında Neler Var?</title>
+      <link>http://veritezgahi.com/tanitim/</link>
+      <pubDate>Sat, 28 Nov 2020 00:31:38 +0300</pubDate>
+      
+      <guid>http://veritezgahi.com/tanitim/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
