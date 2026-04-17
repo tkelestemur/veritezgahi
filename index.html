@@ -1,228 +1,860 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Podcast</title>
+    <title>Veri Tezgâhı | Yapay Zeka, Makine Öğrenmesi ve Robotik Podcast</title>
+    <meta
+        name="description"
+        content="Veri Tezgâhı, makine öğrenmesi, yapay zeka ve robotik üzerine akademi ile endüstriyi buluşturan haftalık podcast."
+    >
+    <meta name="theme-color" content="#13110f">
+    <meta property="og:title" content="Veri Tezgâhı Podcast">
+    <meta
+        property="og:description"
+        content="Makine öğrenmesi, yapay zeka ve robotik üzerine derinlikli sohbetler."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="veri.jpeg">
+    <meta property="og:locale" content="tr_TR">
     <style>
         :root {
-            --primary-color: #2D3436;
-            --accent-color: #00B894;
-            --gradient-bg: linear-gradient(135deg, #2D3436 0%, #000000 100%);
+            --bg: #f4efe7;
+            --bg-soft: #fbf8f3;
+            --surface: rgba(255, 255, 255, 0.72);
+            --surface-strong: rgba(255, 255, 255, 0.88);
+            --text: #171412;
+            --muted: #655b53;
+            --line: rgba(23, 20, 18, 0.12);
+            --accent: #95663e;
+            --accent-soft: rgba(149, 102, 62, 0.14);
+            --shadow: 0 24px 60px rgba(27, 21, 16, 0.12);
+            --radius-xl: 32px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --content-width: 1140px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
             margin: 0;
-            padding: 0;
-            background: var(--gradient-bg);
-            color: white;
+            font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(149, 102, 62, 0.12), transparent 28%),
+                radial-gradient(circle at right 20%, rgba(23, 20, 18, 0.08), transparent 22%),
+                linear-gradient(180deg, #f7f1e8 0%, #f8f4ed 44%, #efe8de 100%);
             min-height: 100vh;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.32), transparent 70%);
+            opacity: 0.35;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-            padding: 40px 0;
+        img {
+            display: block;
+            max-width: 100%;
         }
 
-        header::after {
-            content: '';
+        a {
+            color: inherit;
+        }
+
+        .skip-link {
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: var(--accent-color);
-            border-radius: 2px;
+            left: 16px;
+            top: -48px;
+            z-index: 20;
+            padding: 12px 16px;
+            background: #ffffff;
+            border-radius: 999px;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+        }
+
+        .skip-link:focus {
+            top: 16px;
+        }
+
+        .page-shell {
+            width: min(calc(100% - 32px), var(--content-width));
+            margin: 0 auto;
+            padding: 28px 0 56px;
+            position: relative;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 18px 22px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.52);
+            backdrop-filter: blur(14px);
+            border-radius: 999px;
+            position: sticky;
+            top: 16px;
+            z-index: 10;
+        }
+
+        .brand {
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .topbar nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .topbar nav a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.96rem;
+        }
+
+        .topbar nav a:hover,
+        .topbar nav a:focus-visible {
+            color: var(--text);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.95fr);
+            gap: 36px;
+            align-items: center;
+            padding: 48px 0 42px;
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(14px);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-copy {
+            padding: 44px;
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-copy::after {
+            content: "";
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            right: -84px;
+            top: -92px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(149, 102, 62, 0.2), transparent 68%);
+        }
+
+        .eyebrow,
+        .section-eyebrow {
+            margin: 0 0 14px;
+            color: var(--accent);
+            font-size: 0.83rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+            font-weight: 600;
+            line-height: 1.05;
+            margin: 0;
         }
 
         h1 {
-            font-size: 3.5em;
+            font-size: clamp(3rem, 5vw, 5.3rem);
+            max-width: 8ch;
+            letter-spacing: -0.05em;
+        }
+
+        .hero-lede {
+            margin: 24px 0 0;
+            max-width: 36rem;
+            font-size: 1.08rem;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin: 30px 0 28px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 48px;
+            padding: 0 20px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease;
+        }
+
+        .button:hover,
+        .button:focus-visible {
+            transform: translateY(-1px);
+        }
+
+        .button-primary {
+            background: #151210;
+            color: #ffffff;
+            box-shadow: 0 14px 30px rgba(21, 18, 16, 0.18);
+        }
+
+        .button-primary:hover,
+        .button-primary:focus-visible {
+            background: #000000;
+        }
+
+        .button-secondary {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--line);
+            color: var(--text);
+        }
+
+        .button-secondary:hover,
+        .button-secondary:focus-visible {
+            background: rgba(255, 255, 255, 0.96);
+        }
+
+        .hero-points {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0;
             margin: 0;
-            background: linear-gradient(45deg, #00B894, #00CEC9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        header p {
-            color: #DFE6E9;
-            font-size: 1.2em;
-            margin-top: 15px;
+        .hero-points li {
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.62);
+            border: 1px solid rgba(23, 20, 18, 0.08);
+            color: var(--muted);
+            font-size: 0.94rem;
         }
 
-        .podcast-logo {
-            max-width: 400px;
-            width: 100%;
+        .hero-art {
+            padding: 18px;
+            border-radius: var(--radius-xl);
+            position: relative;
+        }
+
+        .hero-art figure {
+            margin: 0;
+            position: relative;
+        }
+
+        .hero-art img {
+            border-radius: calc(var(--radius-xl) - 8px);
+            aspect-ratio: 1;
+            object-fit: cover;
+            box-shadow: 0 18px 40px rgba(19, 17, 15, 0.15);
+        }
+
+        .art-caption {
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            bottom: 18px;
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: rgba(17, 14, 12, 0.82);
+            color: rgba(255, 255, 255, 0.86);
+            backdrop-filter: blur(8px);
+        }
+
+        .art-caption strong {
             display: block;
-            margin: 0 auto 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
         }
 
-        .podcast-logo:hover {
-            transform: scale(1.02);
+        .art-caption span {
+            display: block;
+            line-height: 1.5;
+            font-size: 0.94rem;
         }
 
-        .platforms {
+        main section + section {
+            margin-top: 24px;
+        }
+
+        .section-card {
+            padding: 38px;
+            border-radius: var(--radius-xl);
+        }
+
+        .section-head {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 30px;
+            gap: 12px;
+            margin-bottom: 28px;
         }
 
-        .platform-section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .section-head h2 {
+            font-size: clamp(2rem, 3.5vw, 3.25rem);
+            letter-spacing: -0.04em;
+            max-width: 16ch;
         }
 
-        .platform-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        .section-head p {
+            margin: 0;
+            max-width: 44rem;
+            color: var(--muted);
+            line-height: 1.8;
         }
 
-        .platform-section h2 {
-            color: var(--accent-color);
-            margin-bottom: 25px;
-            font-size: 1.8em;
-            position: relative;
-            padding-bottom: 10px;
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
         }
 
-        .platform-section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background: var(--accent-color);
-            border-radius: 2px;
+        .insight-card {
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            background: var(--surface-strong);
+            border: 1px solid rgba(23, 20, 18, 0.08);
         }
 
-        .embed-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
+        .insight-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 10px;
+        }
+
+        .insight-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .listen-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+            gap: 18px;
+        }
+
+        .spotify-card,
+        .link-stack article,
+        .host-card,
+        .footer-card {
+            background: var(--surface-strong);
+            border: 1px solid rgba(23, 20, 18, 0.08);
+            box-shadow: 0 12px 30px rgba(22, 18, 16, 0.07);
+        }
+
+        .spotify-card {
+            padding: 28px;
+            border-radius: var(--radius-lg);
+        }
+
+        .platform-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 14px;
+        }
+
+        .spotify-card h3,
+        .link-stack h3,
+        .host-card h3 {
+            font-size: 1.55rem;
+            margin-bottom: 12px;
+        }
+
+        .spotify-card p,
+        .link-stack p,
+        .host-card p,
+        .footer-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .spotify-frame {
+            margin-top: 22px;
+            border-radius: 18px;
             overflow: hidden;
-            max-width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
+            border: 1px solid rgba(23, 20, 18, 0.08);
+            background: #ffffff;
         }
 
-        .embed-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .spotify-frame iframe {
+            display: block;
             width: 100%;
-            height: 100%;
+            min-height: 352px;
             border: 0;
         }
 
-        @media (max-width: 768px) {
-            .platforms {
+        .link-stack {
+            display: grid;
+            gap: 18px;
+        }
+
+        .link-stack article {
+            padding: 24px;
+            border-radius: var(--radius-lg);
+        }
+
+        .inline-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .inline-link::after {
+            content: "->";
+            transition: transform 180ms ease;
+        }
+
+        .inline-link:hover::after,
+        .inline-link:focus-visible::after {
+            transform: translateX(2px);
+        }
+
+        .hosts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .host-card {
+            padding: 28px;
+            border-radius: var(--radius-lg);
+            display: grid;
+            gap: 14px;
+        }
+
+        .host-role {
+            color: var(--accent);
+            font-size: 0.85rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .host-card .inline-link {
+            margin-top: 4px;
+        }
+
+        footer {
+            margin-top: 24px;
+        }
+
+        .footer-card {
+            padding: 22px 28px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .footer-card strong {
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.84rem;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover,
+        .footer-links a:focus-visible {
+            color: var(--text);
+        }
+
+        .hero-copy,
+        .hero-art,
+        .section-card,
+        .footer-card {
+            animation: fade-up 640ms ease both;
+        }
+
+        .hero-art {
+            animation-delay: 80ms;
+        }
+
+        .section-card {
+            animation-delay: 140ms;
+        }
+
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 960px) {
+            .topbar {
+                border-radius: 28px;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .hero,
+            .listen-layout,
+            .insight-grid,
+            .hosts-grid {
                 grid-template-columns: 1fr;
             }
 
-            h1 {
-                font-size: 2.5em;
+            .hero-copy,
+            .hero-art,
+            .section-card {
+                padding-left: 26px;
+                padding-right: 26px;
             }
 
-            .container {
-                padding: 20px;
+            .hero {
+                padding-top: 28px;
             }
         }
 
-        /* Add styles for the author links */
-        .author-links {
-            margin-top: 20px;
-            color: #DFE6E9;
+        @media (max-width: 640px) {
+            .page-shell {
+                width: min(calc(100% - 20px), var(--content-width));
+                padding-top: 12px;
+                padding-bottom: 30px;
+            }
+
+            .topbar {
+                padding: 16px 18px;
+            }
+
+            .topbar nav {
+                gap: 12px 16px;
+            }
+
+            .hero-copy,
+            .hero-art,
+            .section-card,
+            .spotify-card,
+            .link-stack article,
+            .host-card,
+            .footer-card {
+                padding: 22px;
+            }
+
+            .hero-actions,
+            .footer-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .button,
+            .inline-link {
+                justify-content: center;
+            }
+
+            .art-caption {
+                position: static;
+                margin-top: 14px;
+            }
         }
 
-        .author-links a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            position: relative;
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
         }
 
-        .author-links a:hover {
-            color: #00CEC9;
-        }
-
-        .author-links a::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background: var(--accent-color);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .author-links a:hover::after {
-            transform: scaleX(1);
+        a:focus-visible,
+        button:focus-visible,
+        iframe:focus-visible {
+            outline: 3px solid rgba(149, 102, 62, 0.35);
+            outline-offset: 3px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="veri.jpeg" alt="Veri Tezgahi Logo" class="podcast-logo">
-            <h1>Veri Tezgahi Podcast</h1>
-            <p>Makine Öğrenmesi, Yapay Zeka ve Robotik alanlarında endüstri ve akademiden uzmanlarla konuştuğumuz haftalık podcast.</p>
-            <p class="author-links">
-                <a href="https://www.linkedin.com/in/ahmet-salih-gundogdu/" target="_blank">Salih Gündoğdu</a>
-                 -- 
-                <a href="https://www.linkedin.com/in/kelestemur/" target="_blank">Tarık Keleştemur</a>
-            </p>
+    <a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+    <div class="page-shell">
+        <header class="topbar">
+            <a class="brand" href="#anasayfa">Veri Tezgâhı</a>
+            <nav aria-label="Ana gezinme">
+                <a href="#hakkinda">Hakkında</a>
+                <a href="#dinle">Dinle ve İzle</a>
+                <a href="#sunucular">Sunucular</a>
+                <a href="https://open.spotify.com/show/6xh1JvolfduK8j5sb1WnoC" target="_blank" rel="noreferrer">Spotify</a>
+            </nav>
         </header>
 
-        <div class="platforms">
-            <div class="platform-section">
-                <h2>Listen on Spotify</h2>
-                <div class="embed-container">
-                    <!-- Replace YOUR_SPOTIFY_EMBED_CODE with your actual Spotify podcast embed code -->
-                    <iframe src="https://open.spotify.com/embed/show/6xh1JvolfduK8j5sb1WnoC" 
-                        width="100%" 
-                        height="232" 
-                        allowfullscreen="" 
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-                    </iframe>
-                </div>
-            </div>
+        <main id="icerik">
+            <section class="hero" id="anasayfa">
+                <div class="hero-copy panel">
+                    <p class="eyebrow">Yapay zeka, robotik ve makine öğrenmesi</p>
+                    <h1>Veri Tezgâhı Podcast</h1>
+                    <p class="hero-lede">
+                        Akademi ile endüstriyi aynı sohbette buluşturan, uzun formlu ve derinlikli
+                        podcast. Her bölümde sahadaki gerçek problemleri, araştırma bakışını ve ürüne
+                        dönüşen fikirleri konuşuyoruz.
+                    </p>
 
-            <div class="platform-section">
-                <h2>Watch on YouTube</h2>
-                <div class="embed-container">
-                    <!-- Replace YOUR_YOUTUBE_EMBED_CODE with your actual YouTube channel embed code -->
-                    <iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=5Sb_cFJSzRoCEqiV"
-                        width="100%" 
-                        height="315"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                    <div class="hero-actions">
+                        <a
+                            class="button button-primary"
+                            href="https://open.spotify.com/show/6xh1JvolfduK8j5sb1WnoC"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            Spotify'da dinle
+                        </a>
+                        <a
+                            class="button button-secondary"
+                            href="https://www.youtube.com/@veritezgahi"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            YouTube'da izle
+                        </a>
+                    </div>
+
+                    <ul class="hero-points">
+                        <li>Uzman konuklar</li>
+                        <li>Akademi ve ürün dünyası</li>
+                        <li>Türkçe uzun format sohbetler</li>
+                    </ul>
+                </div>
+
+                <aside class="hero-art panel" aria-label="Podcast kapak görseli">
+                    <figure>
+                        <img src="veri.jpeg" alt="Veri Tezgâhı Podcast kapak görseli">
+                        <figcaption class="art-caption">
+                            <strong>Yeni sezon</strong>
+                            <span>Video ve ses formatında, araştırmadan gerçek dünya uygulamalarına uzanan sohbetler.</span>
+                        </figcaption>
+                    </figure>
+                </aside>
+            </section>
+
+            <section class="section-card panel" id="hakkinda">
+                <div class="section-head">
+                    <p class="section-eyebrow">Podcast Hakkında</p>
+                    <h2>Gündemi kovalamaktan çok, neyin neden çalıştığını konuşuyoruz.</h2>
+                    <p>
+                        Veri Tezgâhı; makine öğrenmesi, yapay zeka ve robotik gibi alanlarda üreten
+                        insanların deneyimlerini sakin, net ve teknik derinliği koruyan bir formatta bir
+                        araya getiriyor.
+                    </p>
+                </div>
+
+                <div class="insight-grid">
+                    <article class="insight-card">
+                        <h3>Konular</h3>
+                        <p>LLM'lerden robotik sistemlere, bilgisayarlı görmeden ürünleşmeye uzanan geniş ama odaklı bir alan.</p>
+                    </article>
+                    <article class="insight-card">
+                        <h3>Perspektif</h3>
+                        <p>Akademik araştırma, girişimcilik ve uygulama tarafını aynı bölümde duyabileceğiniz bir bakış.</p>
+                    </article>
+                    <article class="insight-card">
+                        <h3>Format</h3>
+                        <p>Kısa özetler yerine düşünmeye alan açan, bölümden sonra not almak isteyeceğiniz sohbetler.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section-card panel" id="dinle">
+                <div class="section-head">
+                    <p class="section-eyebrow">Dinle ve İzle</p>
+                    <h2>Takip etmek için ihtiyacınız olan her şey tek yerde.</h2>
+                    <p>
+                        Spotify üzerinden doğrudan dinleyebilir, YouTube kanalından video bölümleri
+                        takip edebilir veya Apple Podcasts üzerinden abone olabilirsiniz.
+                    </p>
+                </div>
+
+                <div class="listen-layout">
+                    <article class="spotify-card">
+                        <span class="platform-tag">Spotify</span>
+                        <h3>Sesli dinlemek için hızlı başlangıç</h3>
+                        <p>
+                            Doğrudan sayfa üzerinden oynatın veya Spotify uygulamasında devam edin.
+                            Haftalık bölümleri takip etmenin en kolay yolu.
+                        </p>
+                        <a
+                            class="inline-link"
+                            href="https://open.spotify.com/show/6xh1JvolfduK8j5sb1WnoC"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            Spotify'da aç
+                        </a>
+                        <div class="spotify-frame">
+                            <iframe
+                                src="https://open.spotify.com/embed/show/6xh1JvolfduK8j5sb1WnoC?utm_source=generator&amp;theme=0"
+                                loading="lazy"
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                title="Veri Tezgâhı Spotify oynatıcı"
+                            ></iframe>
+                        </div>
+                    </article>
+
+                    <div class="link-stack">
+                        <article>
+                            <span class="platform-tag">YouTube</span>
+                            <h3>Video bölümleri izle</h3>
+                            <p>
+                                Yeni sezonu video formatında takip etmek, bölümlere yorum bırakmak ve
+                                kanala abone olmak için YouTube sayfasına geçin.
+                            </p>
+                            <a
+                                class="inline-link"
+                                href="https://www.youtube.com/@veritezgahi"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                Kanala git
+                            </a>
+                        </article>
+
+                        <article>
+                            <span class="platform-tag">Apple Podcasts</span>
+                            <h3>Apple ekosisteminde takip et</h3>
+                            <p>
+                                iPhone, iPad veya Mac kullanıyorsanız bölümleri Apple Podcasts
+                                üzerinden de kaydedebilir ve düzenli takip edebilirsiniz.
+                            </p>
+                            <a
+                                class="inline-link"
+                                href="https://podcasts.apple.com/us/podcast/veri-tezgah%C4%B1/id1525335606"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                Apple Podcasts'te aç
+                            </a>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-card panel" id="sunucular">
+                <div class="section-head">
+                    <p class="section-eyebrow">Sunucular</p>
+                    <h2>Konuşmayı seven, konuyu dağıtmadan derinleştiren iki ev sahibi.</h2>
+                    <p>
+                        Podcast'i birlikte hazırlayan ve sohbetin ritmini kuran ev sahiplerine doğrudan
+                        ulaşmak için LinkedIn profillerini kullanabilirsiniz.
+                    </p>
+                </div>
+
+                <div class="hosts-grid">
+                    <article class="host-card">
+                        <span class="host-role">Co-host</span>
+                        <h3>Salih Gündoğdu</h3>
+                        <p>Araştırma, uygulama ve ürün tarafındaki deneyimleri bir araya getiren, teknik derinliği kuvvetli sohbetler kuruyor.</p>
+                        <a
+                            class="inline-link"
+                            href="https://www.linkedin.com/in/ahmet-salih-gundogdu/"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            LinkedIn profili
+                        </a>
+                    </article>
+
+                    <article class="host-card">
+                        <span class="host-role">Co-host</span>
+                        <h3>Tarık Keleştemur</h3>
+                        <p>Yapay zeka ve robotik ekseninde, araştırma ile gerçek dünya kullanımları arasındaki köprüyü güçlendiren sorular soruyor.</p>
+                        <a
+                            class="inline-link"
+                            href="https://www.linkedin.com/in/kelestemur/"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            LinkedIn profili
+                        </a>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-card">
+                <div>
+                    <strong>Veri Tezgâhı Podcast</strong>
+                </div>
+                <div class="footer-links">
+                    <a href="https://open.spotify.com/show/6xh1JvolfduK8j5sb1WnoC" target="_blank" rel="noreferrer">Spotify</a>
+                    <a href="https://www.youtube.com/@veritezgahi" target="_blank" rel="noreferrer">YouTube</a>
+                    <a href="https://x.com/veritezgahi" target="_blank" rel="noreferrer">X</a>
                 </div>
             </div>
-        </div>
+        </footer>
     </div>
 </body>
 </html>
